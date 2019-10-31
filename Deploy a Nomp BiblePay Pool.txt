@@ -53,6 +53,8 @@ chmod 777 deploypool.sh
 ./deploypool.sh
 cd /pool/nomp
 
+7.3 copy biblepay_example.json to biblepay.json in /pool/nomp/coins
+
 8.  Coin Config file: The file /nomp/coins/biblepay.json was already modified by BiblePay IT so you do not need to do anything here.
 
 9.  Modify : /website/index.html:
