@@ -68,12 +68,12 @@ module.exports = function (logger, poolConfig) {
     this.handleShare = function (isValidShare, isValidBlock, shareData) {
 
         var redisCommands = [];
-        var penalty = .90;
+        var penalty = 1.0;
         if (shareData.error == "job not found") {
-            penalty = .25;
+            penalty = .01;
         }
 		if (shareData.error == "high nonce") {
-			penalty = 2.0;
+			penalty = .20;
 		}
         if (isValidShare) {
             redisCommands.push(['hincrbyfloat', coin + ':shares:roundCurrent', shareData.worker, shareData.difficulty]);

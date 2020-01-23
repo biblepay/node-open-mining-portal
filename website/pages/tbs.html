@@ -39,7 +39,6 @@
         <th>Algo</th>
         <th>Workers</th>
         <th>Valid Shares</th>
-        <th>Valid ABN Shares</th>
         <th>Invalid Shares</th>
         <th>Total Blocks</th>
         <th>Pending</th>
@@ -51,10 +50,9 @@
     {{ for(var pool in it.stats.pools) { }}
     <tr class="pure-table-odd">
         <td>{{=it.stats.pools[pool].name}}</td>
-        <td>{{=it.stats.pools[pool].algorithm}}</td>
+        <td>POBH</td>
         <td>{{=Object.keys(it.stats.pools[pool].workers).length}}</td>
         <td>{{=it.stats.pools[pool].poolStats.validShares}}</td>
-        <td>{{=it.stats.pools[pool].poolStats.validabnShares}}</td>
         <td>{{=it.stats.pools[pool].poolStats.invalidShares}}</td>
         <td>{{=it.stats.pools[pool].poolStats.validBlocks}}</td>
         <td>{{=it.stats.pools[pool].blocks.pending}}</td>
