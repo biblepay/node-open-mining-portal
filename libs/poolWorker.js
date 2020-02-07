@@ -134,6 +134,9 @@ module.exports = function(logger){
                 if (poolOptions.validateWorkerUsername !== true)
                     authCallback(true);
                 else {
+					if (typeof workerName == "undefined")
+					   workerName = "NA";
+
                     if (workerName.length === 40) {
                         try {
                             new Buffer(workerName, 'hex');
@@ -309,8 +312,8 @@ module.exports = function(logger){
     // configuation for any proxy switching ports configured into the stratum pool object.
     //
     this.setDifficultyForProxyPort = function(pool, coin, algo) {
-
-        logger.debug(logSystem, logComponent, algo, 'Setting proxy difficulties after pool start');
+		if (false)
+		     logger.debug(logSystem, logComponent, algo, 'Setting proxy difficulties after pool start');
 
         Object.keys(portalConfig.switching).forEach(function(switchName) {
             if (!portalConfig.switching[switchName].enabled) return;
