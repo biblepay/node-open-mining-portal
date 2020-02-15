@@ -42,7 +42,8 @@ module.exports = function (logger) {
         'history.html': 'history',
         'api.html': 'api',
         'admin.html': 'admin',
-        'mining_key.html': 'mining_key'
+        'mining_key.html': 'mining_key',
+        'xmrinquiry.html' : 'xmrinquiry'
     };
 
     var pageTemplates = {};

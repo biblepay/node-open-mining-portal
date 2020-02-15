@@ -1,13 +1,9 @@
 var zlib = require('zlib');
-
 var redis = require('redis');
 var async = require('async');
-
-
 var os = require('os');
-
 var algos = require('stratum-pool/lib/algoProperties.js');
-
+//var store = require('store');
 
 module.exports = function (logger, portalConfig, poolConfigs) {
 
@@ -97,6 +93,12 @@ module.exports = function (logger, portalConfig, poolConfigs) {
         _this.statPoolHistory.push(data);
     }
 
+    function getDouble(strNum) {
+        var n = parseFloat(strNum);
+        if (isNaN(n))
+            n = 0;
+        return n;
+    }
 
     this.getGlobalStats = function (callback) {
 
@@ -283,43 +285,43 @@ module.exports = function (logger, portalConfig, poolConfigs) {
                 var coinStats = allCoinStats[coin];
                 coinStats.workers = {};
                 coinStats.shares = 0;
-                coinStats.abnshares = 0;
-
 
                 coinStats.hashrates.forEach(function (ins) {
                     var parts = ins.split(':');
                     var workerShares = parseFloat(parts[0]);
                     var worker = parts[1];
-                    var hasabn = parseFloat(parts[3]);
-
+                    //        var hashrateData = [isValidShare ? shareData.difficulty : -shareData.difficulty * penalty, shareData.worker, dateNow, shareData.xmrsuccess, shareData.xmrfail, shareData.xmrcharitysuccess, shareData.arityfail];
+                    if (worker in coinStats.workers) {
+                    }else{
+                        coinStats.workers[worker] = {
+                            shares: workerShares,
+                            invalidshares: 0,
+                            bbpsuccess: 0,
+                            bbpfail: 0,
+                            xmrsuccess: 0,
+                            xmrfail: 0,
+                            xmrcharitysuccess: 0,
+                            xmrcharityfail: 0,
+                            hashrateString: null
+                        };
+                    }
                     if (workerShares > 0) {
                         coinStats.shares += workerShares;
-                        if (worker in coinStats.workers)
-                            coinStats.workers[worker].shares += workerShares;
-                        else
-                            coinStats.workers[worker] = {
-                                shares: workerShares,
-                                invalidshares: 0,
-                                abnshares: 0,
-                                hashrateString: null
-                            };
+                        coinStats.workers[worker].shares += workerShares;
                     }
                     else {
-                        if (worker in coinStats.workers)
-                            coinStats.workers[worker].invalidshares -= workerShares; // workerShares is negative number!
-                        else
-                            coinStats.workers[worker] = {
-                                shares: 0,
-                                abnshares: 0,
-                                invalidshares: -workerShares,
-                                hashrateString: null
-                            };
+                        coinStats.workers[worker].invalidshares -= workerShares; // workerShares is negative number!
                     }
-
-                    if (hasabn > 0) {
-                        coinStats.workers[worker].abnshares += workerShares;
+                    if (parts.length > 3) {
+                        coinStats.workers[worker].xmrsuccess += getDouble(parts[3]);
+                        coinStats.workers[worker].xmrfail += getDouble(parts[4]);
+                        coinStats.workers[worker].xmrcharitysuccess += getDouble(parts[5]);
+                        coinStats.workers[worker].xmrcharityfail += getDouble(parts[6]);
+                        if (false) {
+                            console.log(" memorize %s xmrs %d and xmrf %d %d %d", ins, coinStats.workers[worker].xmrsuccess,
+                            coinStats.workers[worker].xmrfail, coinStats.workers[worker].xmrcharitysuccess, coinStats.workers[worker].xmrcharityfail);
+                        }
                     }
-
                 });
 
                 var shareMultiplier = Math.pow(2, 32) / algos[coinStats.algorithm].multiplier;

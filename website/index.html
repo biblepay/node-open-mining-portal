@@ -25,7 +25,7 @@
 
 </head>
 
-<body>
+<body style="max-width:1200px">
 
 <header>
     <div class="home-menu pure-menu pure-menu-open pure-menu-horizontal">
@@ -60,8 +60,15 @@
 
             <li class="{{? it.selected === 'history' }}pure-menu-selected{{?}}">
                 <a class="hot-swapper" href="/history">
-                    <i class="fa fa-cogs"></i>&nbsp;
+                    <i class="fa fa-flag-checkered"></i>&nbsp;
                     Historical Stats
+                </a>
+            </li>
+
+            <li class="{{? it.selected === 'xmrinquiry' }}pure-menu-selected{{?}}">
+                <a class="hot-swapper" href="/xmrinquiry">
+                    <i class="fa fa-folder"></i>&nbsp;
+                    XMR Inquiry
                 </a>
             </li>
 
@@ -87,10 +94,10 @@
         This site is powered by the open source&nbsp;<a target="_blank" href="https://github.com/zone117x/node-open-mining-portal/">NOMP</a>&nbsp;
         project created by Matthew Little and licensed under the&nbsp;<a href="http://www.gnu.org/licenses/gpl-2.0.html">GPL</a>&nbsp;
         <br />
-        This pool charges a .7% fee: .6% goes to the pool operator, .1% goes to NOMP automatically&nbsp;
+        10% of the XMR hashes go toward orphan charity, .6% of the BBP hashes go to pool administration, .1% of the BBP hashes go to NOMP (Matthew Little) automatically.&nbsp;
     </div>
     <div>
-        <i class="fa fa-heart"></i>&nbsp; Support this project by donating&nbsp;<i class="fa fa-btc"></i>&nbsp;BTC: 1KRotMnQpxu3sePQnsVLRy3EraRFYfJQFR
+        <i class="fa fa-heart"></i>&nbsp; Support NOMP (Matthew Little) by donating BTC to &nbsp;<i class="fa fa-btc"></i>&nbsp;BTC: 1KRotMnQpxu3sePQnsVLRy3EraRFYfJQFR
     </div>
     <div id="communityFooter">
         Community&nbsp;<i class="fa fa-comment"></i>&nbsp;: &nbsp;<a target="_blank" href="https://kiwiirc.com/client/irc.freenode.net/nomp">#nomp IRC</a>

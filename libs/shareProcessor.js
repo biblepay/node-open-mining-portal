@@ -72,9 +72,12 @@ module.exports = function (logger, poolConfig) {
         if (shareData.error == "job not found") {
             penalty = .01;
         }
-		if (shareData.error == "high nonce") {
-			penalty = .20;
-		}
+        if (shareData.error == "high nonce") {
+            penalty = .50;
+        }
+        if (shareData.error == "stale share") {
+            penalty = .50;
+        }
         if (isValidShare) {
             redisCommands.push(['hincrbyfloat', coin + ':shares:roundCurrent', shareData.worker, shareData.difficulty]);
             redisCommands.push(['hincrby', coin + ':stats', 'validShares', 1]);
@@ -86,7 +89,7 @@ module.exports = function (logger, poolConfig) {
         doesn't overwrite an existing entry, and timestamp as score lets us query shares from last X minutes to
         generate hashrate for each worker and pool. */
         var dateNow = Date.now();
-        var hashrateData = [isValidShare ? shareData.difficulty : -shareData.difficulty * penalty, shareData.worker, dateNow, shareData.hasabn];
+        var hashrateData = [isValidShare ? shareData.difficulty : -shareData.difficulty * penalty, shareData.worker, dateNow, shareData.xmrsuccess, shareData.xmrfail, shareData.xmrcharitysuccess, shareData.xmrcharityfail];
         redisCommands.push(['zadd', coin + ':hashrate', dateNow / 1000 | 0, hashrateData.join(':')]);
 
         if (isValidBlock) {
