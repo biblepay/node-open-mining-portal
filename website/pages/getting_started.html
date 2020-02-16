@@ -227,10 +227,10 @@
     </div>
 
     <div id="main">
-        <a href="https://wiki.biblepay.org/nomp_mining" class="miningOption" id="na1">
+        <a href="https://github.com/biblepay/xmrig/raw/master/binaries/bbprig.zip" class="miningOption" id="showCoinConfigInfo">
             <div class="miningOptionNum">1.</div>
             <div class="miningOptionInstructions">
-                <div>Read the Easy Start Guide</div>
+                <div>Download the XMRig Miner</div>
                 <div> &nbsp;</div>
             </div>
         </a>
@@ -261,7 +261,7 @@
         </div>
         <div id="coinInfoRowValues">
             <div id="coinInfoUsername">Your BBP Wallet Address</div>
-            <div>anything</div>
+            <div>Your Monero Wallet Address</div>
         </div>
     </div>
 </div>
@@ -271,14 +271,14 @@
     function showCoinConfig(info){
 
         var htmlKeys = '<div class="coinInfoData">Algorithm:</div>';
-        var htmlValues = '<div class="coinInfoData">' + info.algo + '</div>';
+        var htmlValues = '<div class="coinInfoData">RandomX</div>';
 
         for (var port in info.ports){
             htmlKeys += '<div class="coinInfoData">URL <span class="coinInfoSubtle">(difficulty ' + info.ports[port].diff + ')</span>:</div>';
             htmlValues += '<div class="coinInfoData">stratum+tcp://' + info.host + ':' + port + '</div>';
         }
 		htmlKeys += "<div class='coinInfoData'>Example:</div>";
-		htmlValues += "<div class='coinInfoData'><small>./bbpminer -ostratum+tcp://nomp.biblepay.org:3008 --user=your_bbp_address</div>";
+		htmlValues += "<div class='coinInfoData'><small>./xmrig -o rxtest.biblepay.org:3008 --user=your_bbp_address --password=your_monero_address</div>";
 
         if (info.coin)
             $('#coinInfoUsername').text('your ' + info.coin.name + ' wallet address');

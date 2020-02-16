@@ -70,7 +70,7 @@ function buildChartData(){
 
 function getReadableHashRateString(hashrate){
     var i = -1;
-    var byteUnits = [ ' KH', ' KH', ' GH', ' TH', ' PH' ];
+    var byteUnits = [ ' H', ' KH', ' MH', ' GH', ' TH' ];
     do {
         hashrate = hashrate / 1024;
         i++;
