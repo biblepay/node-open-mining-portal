@@ -278,7 +278,7 @@
             htmlValues += '<div class="coinInfoData">stratum+tcp://' + info.host + ':' + port + '</div>';
         }
 		htmlKeys += "<div class='coinInfoData'>Example:</div>";
-		htmlValues += "<div class='coinInfoData'><small>./xmrig -o rxtest.biblepay.org:3008 --user=your_bbp_address --password=your_monero_address</div>";
+		htmlValues += "<div class='coinInfoData'><small>./xmrig -o rxtest.biblepay.org:3008 --user=your_bbp_address --password=your_monero_address.your_worker_name<br>NOTE: your_worker_name is optional, but if provided it adds your cpu information per worker to xmrig.</div>";
 
         if (info.coin)
             $('#coinInfoUsername').text('your ' + info.coin.name + ' wallet address');

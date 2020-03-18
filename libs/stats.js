@@ -5,6 +5,7 @@ var os = require('os');
 var algos = require('stratum-pool/lib/algoProperties.js');
 //var store = require('store');
 var logComponent = 'stats';
+var moneroAddr2 = '';
 
 module.exports = function (logger, portalConfig, poolConfigs) {
 
@@ -32,9 +33,8 @@ module.exports = function (logger, portalConfig, poolConfigs) {
     Object.keys(poolConfigs).forEach(function (coin) {
 
         if (!canDoStats) return;
-
         var poolConfig = poolConfigs[coin];
-
+		moneroAddr2 = poolConfig.monero;
         var redisConfig = poolConfig.redis;
 
         for (var i = 0; i < redisClients.length; i++) {
@@ -129,7 +129,6 @@ module.exports = function (logger, portalConfig, poolConfigs) {
                     var clonedTemplates = t.slice(0);
                     clonedTemplates[1] = coin + clonedTemplates[1];
                     redisCommands.push(clonedTemplates);
-                    // console.log('coin %s', coin);
                 });
             });
 
@@ -144,7 +143,6 @@ module.exports = function (logger, portalConfig, poolConfigs) {
 
                     if (error) {
                         console.log('error %s', JSON.stringify(error));
-
                         logger.error(logSystem, logComponent, 'Could not get blocks from redis ' + JSON.stringify(error));
                     }
 
@@ -330,7 +328,7 @@ module.exports = function (logger, portalConfig, poolConfigs) {
 
                 coinStats.workerCount = Object.keys(coinStats.workers).length;
                 portalStats.global.workers += coinStats.workerCount;
-
+				portalStats.moneroAddress = moneroAddr2;
                 /* algorithm specific global stats */
                 var algo = coinStats.algorithm;
                 if (!portalStats.algos.hasOwnProperty(algo)) {

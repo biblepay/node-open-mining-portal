@@ -13,7 +13,7 @@
         margin: 50px 18px 10px 18px;
     }
     #welcomeItems{
-        list-style-type: none;
+        list-style-type: square;
         font-size: 1.3em;
         padding: 0 !important;
         margin: 0 0 0 18px !important;
@@ -76,10 +76,10 @@
 
 <div class="pure-g-r" id="boxWelcome">
     <div class="pure-u-1-3">
-        <img id="logoImg" src="/static/logo.svg">
+        <img id="logoImg" src="https://i.ibb.co/W691XWC/Screen-Shot-2019-12-12-at-16-01-29.png">
     </div>
     <div class="pure-u-2-3">
-        <div id="welcomeText">Welcome to the future of mining</div>
+        <div id="welcomeText"><h3>Welcome to the Future of Orphan-Mining</h3></div>
         <ul id="welcomeItems">
             <li>Orphan Charity - Fulfilling James 1:27</li>
             <li>RandomX Mining</li>
@@ -100,6 +100,7 @@
                     <div><i class="fa fa-flask"></i>RandomX</div>
                     <div><i class="fa fa-users"></i><span id="statsMiners{{=algo}}">{{=it.stats.algos[algo].workers}}</span> Miners</div>
                     <div><i class="fa fa-tachometer"></i><span id="statsHashrate{{=algo}}">{{=it.stats.algos[algo].hashrateString}}</span></div>
+                    <div><i class="fa fa-ambulance"></i><span id='moneroAddr' style='overflow:hidden;display:inline-block;max-width:325px;text-overflow:ellipsis;'>{{=it.stats.moneroAddress}}</span></div>
                 </div>
                 {{ } }}
             </div>
@@ -115,6 +116,7 @@
                     <div><i class="fa fa-dot-circle-o"></i>{{=pool}}</div>
                     <div><i class="fa fa-users"></i><span id="statsMiners{{=pool}}">{{=it.stats.pools[pool].workerCount}}</span> Miners</div>
                     <div><i class="fa fa-tachometer"></i><span id="statsHashrate{{=pool}}">{{=it.stats.pools[pool].hashrateString}}</span></div>
+                    <div></div>
                 </div>
                 {{ } }}
             </div>
