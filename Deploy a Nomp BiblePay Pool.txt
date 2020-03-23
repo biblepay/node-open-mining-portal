@@ -94,7 +94,7 @@ Note: Payments will be sent out approx. 30 minutes after blocks mature.
 
 
 
-******************** Upgrading the Pool *******************************
+******************************* Upgrading the Pool *******************************
 
 To upgrade the biblepay pool, after you see the github node-stratum-pool or node-mining-portal has a new release:
 
@@ -108,23 +108,34 @@ cd ..
 cd nomp
 node init.js <- This restarts the pool
 
+****************************** RANDOMX UPGRADE INFORMATION ******************************
 
-*********************   Recommended Settings to decrease Total Invalid Shares below < 10% **************************************************
+cd /pool/nomp/pool_configs
+nano biblepay.json
+#After the line that contains : "address" : "your_bbp_pool_receive_address" (which has a comma at the end of the line), insert a BRAND NEW line:
+"monero": "your_monero_pool_address", 
+#Note the above line also contains a comma at the end.  Where monero pool address is the public charity address for the pool.  You can get one from an SPV wallet such as mymonero.com.
+#Since RandomX has a higher diff, it is recommended we change the port numbers and diff levels.  For example at rx.biblepay.org:
+"ports": "3001": "diff": 1
+"ports": "3002": "diff": 2
+"ports": "3007": "diff": 7
+"ports": "3032": vardiff - mine is 1-10
+# Save the file.
 
-File: pool_configs.json:
-"ports": "3008" "diff": 7
-"ports": "3032": "diff": 4
+#Next, Please modify your /pool/nomp/config.json file:
+"blockRefreshInterval": 30000
+"jobRebroadcastTimeout": 45
+"connectionTimeout" 6000
+"website": { "stratumHost":  "your_randomx_pool_dns_address such as rx.biblepay.org" }
 
-File: config.json:
-"defaultPoolConfigs" : "blockRefreshInterval": 90000
-"jobRebroadcastTimeout": 280
-"connectionTimeout": 1800
+#other settings in config.json that we have not changed in RX, but we should keep enabled:
 "banning": "enabled": true
 "time": 600
-"invalidPercent" 30
-"checkThreshold": 1
-"purgeInterval": 90
-"website" "hashrateWindow": 4200
+"invalidPercent" 50
+"checkThreshold": 500
+"purgeInterval": 300
+"website" "historicalRetention": 43200,
+"website" "hashrateWindow": 1500
 "updateInterval": 30
 
 
