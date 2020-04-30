@@ -56,25 +56,27 @@ chmod 777 deploypool.sh
 ./deploypool.sh
 cd /pool/nomp
 
-8.  Coin Config file: The file /nomp/coins/biblepay.json was already modified by BiblePay IT so you do not need to do anything here.
+7.3 copy biblepay_example.json to biblepay.json in /pool/nomp/coins
+
+8.  Coin Config file: The file /nomp/coins/biblepay.json is already modified by BiblePay IT so you do not need to do anything here.
 
 9.  Modify : /website/index.html:
 Change the pool percentage to the applicable pool percentage you charge in the config file (seen below): search for ".7%".
 
 10. Modify nomp/pool_configs/biblepay.json:
-First, locate the line: "pool_receive_address_y*".  Load the BBP pool wallet, and navigate to the address book, and copy the pool receive address to the clipboard.  Edit the name to be "NOMP" or "Pool".  Paste the address into this key.
+First, locate the line: "pool_receive_address_y*".  Load the BBP pool wallet, and navigate to the address book, and copy the pool receive address to the clipboard.  Edit the name to be "NOMP" or "Pool". Completely replace pool_receive_address_y* with pool wallet BiblePay receive address.
 Also, edit the next instance of "pool_receive_address_y*" with the same value.
 Modify the .6 to be the % you charge for your pool.
 Optionally, change the .1% given to Nomps key (Note: It is OK to leave the 2285* address in the file, as this is a public-key-script address for NOMP).
 NOTE: Be very careful NOT to remove keys OR add any keys to this file until AFTER you get your pool running AND you backup this file.  One mistake to the file, and the pool will crash with cryptic messages.  
 Please triple verify any key value you change in this file as you type each key.  If you remove a quote for example, the pool will crash.
-Change the 'rpcuser' and 'rpcpassword' values in the file (all 3*) to your RPC username and RPC password set in step 6.
+Change the 'rpcuser' and 'rpcpassword' values in the file /pool/nomp/pool_configs/biblepay.json to your RPC username and RPC password set in step 6. For ports, under daemons and payment_processing the port is the same as your rpcport in biblepay.conf. For p2p, it is the same as port in biblepay.conf
 Save the file.
 
 12.  Adjust the nomp/config.json values:
 The blockRefreshInterval is set to 37000, this is pretty good to poll the RPC to find new blocks (as, NOMP finds them anyway when shares are submitted).
 Read more about stratum to understand the jobRebroadcastTimeout and connectionTimeout settings.  No need to change them.
-Change the pool.biblepay.org "stratumHost" to match your FQDN (domain name) for your port 80 website.  This is the address people will navigate to see your NOMP presence.
+Change the pool.biblepay.org "stratumHost" to match your FQDN (domain name) for your port 80 website.  This is the address people will navigate to see your NOMP presence. If you are unable to see your domain, confirm firewall is disabled or port 80 is allowed thru the firewall.
 Change the adminpassword to your admin password.
 We have not tested multi-pool mining or profit-switching therefore the defaults still exist.
 
