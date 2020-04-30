@@ -1,0 +1,6 @@
+{
+    "name": "BiblePay",
+    "symbol": "BBP",
+    "algorithm": "x11",
+    "mposDiffMultiplier": 256
+}
